@@ -3,6 +3,7 @@ import axios from 'axios'
 import './App.css'
 import SearchBar from './components/SearchBar'
 import PokemonCard from './components/PokemonCard'
+import StatsChart from './components/StatsChart'
 
 function App() {
   const [pokemon, setPokemon] = useState(null)
@@ -39,7 +40,12 @@ function App() {
         <SearchBar onSearch={handleSearch} />
         {loading && <p className="status-message">Loading...</p>}
         {error && <p className="status-message status-message--error">{error}</p>}
-        {!loading && !error && pokemon && <PokemonCard pokemon={pokemon} />}
+        {!loading && !error && pokemon && (
+          <div className="results-stack">
+            <PokemonCard pokemon={pokemon} />
+            <StatsChart baseStats={pokemon.stats} />
+          </div>
+        )}
       </section>
     </main>
   )

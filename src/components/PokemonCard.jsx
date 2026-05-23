@@ -1,33 +1,33 @@
 import './PokemonCard.css'
 
 const typeColors = {
-  normal: '#A8A77A',
-  fire: '#EE8130',
-  water: '#6390F0',
-  electric: '#F7D02C',
-  grass: '#7AC74C',
-  ice: '#96D9D6',
-  fighting: '#C22E28',
-  poison: '#A33EA1',
-  ground: '#E2BF65',
-  flying: '#A98FF3',
-  psychic: '#F95587',
-  bug: '#A6B91A',
-  rock: '#B6A136',
-  ghost: '#735797',
-  dragon: '#6F35FC',
-  dark: '#705746',
-  steel: '#B7B7CE',
-  fairy: '#D685AD',
+  normal: '#9CA3AF',
+  fire: '#F97316',
+  water: '#3B82F6',
+  electric: '#FACC15',
+  grass: '#22C55E',
+  ice: '#38BDF8',
+  fighting: '#DC2626',
+  poison: '#A855F7',
+  ground: '#D97706',
+  flying: '#60A5FA',
+  psychic: '#EC4899',
+  bug: '#84CC16',
+  rock: '#A16207',
+  ghost: '#6366F1',
+  dragon: '#4F46E5',
+  dark: '#374151',
+  steel: '#94A3B8',
+  fairy: '#F472B6',
 }
 
 function capitalize(value) {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
-function PokemonCard({ pokemon }) {
+function PokemonCard({ pokemon, isVisible }) {
   return (
-    <article className="pokemon-card">
+    <article className={`pokemon-card ${isVisible ? 'pokemon-card--visible' : ''}`}>
       <h2 className="pokemon-card__name">{capitalize(pokemon.name)}</h2>
       <img
         className="pokemon-card__image"

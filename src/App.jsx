@@ -9,6 +9,7 @@ function App() {
   const [pokemon, setPokemon] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isCardVisible, setIsCardVisible] = useState(false)
 
   const handleSearch = async (searchTerm) => {
     const query = searchTerm.trim().toLowerCase()
@@ -16,18 +17,22 @@ function App() {
     if (!query) {
       setPokemon(null)
       setError('')
+      setIsCardVisible(false)
       return
     }
 
     setLoading(true)
     setError('')
+    setIsCardVisible(false)
 
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${query}`)
       setPokemon(response.data)
+      requestAnimationFrame(() => setIsCardVisible(true))
     } catch (requestError) {
       setPokemon(null)
       setError('Pokemon not found.')
+      setIsCardVisible(false)
     } finally {
       setLoading(false)
     }
@@ -42,7 +47,7 @@ function App() {
         {error && <p className="status-message status-message--error">{error}</p>}
         {!loading && !error && pokemon && (
           <div className="results-stack">
-            <PokemonCard pokemon={pokemon} />
+            <PokemonCard pokemon={pokemon} isVisible={isCardVisible} />
             <StatsChart baseStats={pokemon.stats} />
           </div>
         )}
